@@ -10,4 +10,5 @@ public interface IProductService {
     List<Product> listAllProduct();
     boolean editProduct(int id, String name, int price, String color, int quantity,String description,String category);
     Product getProduct(int ID);
+    Product searchProduct(String str);
 }

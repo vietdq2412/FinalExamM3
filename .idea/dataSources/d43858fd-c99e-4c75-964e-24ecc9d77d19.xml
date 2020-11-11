@@ -771,93 +771,139 @@ SELECT|sys.sys_config:null
     </routine>
     <table id="239" parent="4" name="category"/>
     <table id="240" parent="4" name="product"/>
-    <column id="241" parent="237" name="id">
+    <routine id="241" parent="4" name="addProduct">
+      <SourceTextLength>144</SourceTextLength>
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <routine id="242" parent="4" name="search">
+      <SourceTextLength>76</SourceTextLength>
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <routine id="243" parent="4" name="serach">
+      <SourceTextLength>61</SourceTextLength>
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <column id="244" parent="237" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="242" parent="237" name="name">
+    <column id="245" parent="237" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="243" parent="237" name="address">
+    <column id="246" parent="237" name="address">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
     </column>
-    <key id="244" parent="237" name="PRIMARY">
+    <key id="247" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <argument id="245" parent="238" name="namee">
+    <argument id="248" parent="238" name="namee">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
     </argument>
-    <argument id="246" parent="238" name="addresss">
+    <argument id="249" parent="238" name="addresss">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
     </argument>
-    <column id="247" parent="239" name="ID">
+    <column id="250" parent="239" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="248" parent="239" name="name">
+    <column id="251" parent="239" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <key id="249" parent="239" name="PRIMARY">
+    <key id="252" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="250" parent="240" name="ID">
+    <column id="253" parent="240" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="251" parent="240" name="name">
+    <column id="254" parent="240" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
-      <Collation>ucs2_general_ci</Collation>
     </column>
-    <column id="252" parent="240" name="price">
+    <column id="255" parent="240" name="price">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="253" parent="240" name="color">
+    <column id="256" parent="240" name="color">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="254" parent="240" name="quantity">
+    <column id="257" parent="240" name="quantity">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="255" parent="240" name="description">
+    <column id="258" parent="240" name="description">
       <Position>6</Position>
       <DataType>varchar(1000)|0s</DataType>
       <Collation>ucs2_general_ci</Collation>
     </column>
-    <column id="256" parent="240" name="category">
+    <column id="259" parent="240" name="category">
       <Position>7</Position>
       <DataType>varchar(30)|0s</DataType>
     </column>
-    <index id="257" parent="240" name="name">
+    <index id="260" parent="240" name="name">
       <ColNames>name</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="258" parent="240" name="PRIMARY">
+    <key id="261" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="259" parent="240" name="name">
+    <key id="262" parent="240" name="name">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
+    <argument id="263" parent="241" name="_name">
+      <Position>1</Position>
+      <DataType>varchar(30)|0s</DataType>
+    </argument>
+    <argument id="264" parent="241" name="_price">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+    </argument>
+    <argument id="265" parent="241" name="_quatity">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+    </argument>
+    <argument id="266" parent="241" name="_color">
+      <Position>4</Position>
+      <DataType>varchar(20)|0s</DataType>
+    </argument>
+    <argument id="267" parent="241" name="_descrip">
+      <Position>5</Position>
+      <DataType>varchar(500)|0s</DataType>
+    </argument>
+    <argument id="268" parent="241" name="_category">
+      <Position>6</Position>
+      <DataType>varchar(20)|0s</DataType>
+    </argument>
+    <argument id="269" parent="242" name="_str">
+      <Position>1</Position>
+      <DataType>varchar(30)|0s</DataType>
+    </argument>
+    <argument id="270" parent="243" name="_str">
+      <Position>1</Position>
+      <DataType>varchar(30)|0s</DataType>
+    </argument>
   </database-model>
 </dataSource>

@@ -32,6 +32,9 @@ public class ProductServlet extends HttpServlet {
             case "edit":
                 editProduct(request,response);
                 break;
+            case "search":
+                serchResult(request,response);
+                break;
             default:
                 showProduct(request,response);
         }
@@ -46,7 +49,8 @@ public class ProductServlet extends HttpServlet {
         String color = request.getParameter("color");
         String desc = request.getParameter("desc");
         String category = request.getParameter("category");
-        service.addNewProduct(new Product(name,price,color,desc,category));
+
+        service.addNewProduct(new Product(name,price,quantity,color,desc,category));
 
         showProduct(request,response);
     }
@@ -62,7 +66,14 @@ public class ProductServlet extends HttpServlet {
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         ProductService service = new ProductService();
         int id = Integer.parseInt(request.getParameter("id"));
-        boolean rs = service.deleteProduct(id);
+        String name = request.getParameter("name");
+        int price = Integer.parseInt(request.getParameter("price"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        String color = request.getParameter("color");
+        String desc = request.getParameter("desc");
+        String category = request.getParameter("category");
+        System.out.println("|"+id+name+price+color);
+        boolean rs = service.editProduct(id,name,price,color,quantity,desc,category);
         if (rs){
             request.setAttribute("message", "delete success!");
         }
@@ -76,6 +87,7 @@ public class ProductServlet extends HttpServlet {
             case "create":
                 System.out.println("show form");
                 showCreateProductForm(request,response);
+                break;
             case "delete":
                 deleteProduct(request,response);
                 break;
@@ -89,13 +101,30 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
+    private void serchResult(HttpServletRequest request, HttpServletResponse response) {
+        ProductService service = new ProductService();
+        String str = request.getParameter("str");
+        System.out.println(str);
+        Product product = service.searchProduct(str);
+        request.setAttribute("product",product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("searchResult.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void showEditProductForm(HttpServletRequest request, HttpServletResponse response) {
         ProductService service = new ProductService();
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = service.getProduct(id);
         request.setAttribute("product",product);
         List<String> list = getCategoryNameList();
-        request.setAttribute("category",list);
+        request.setAttribute("listCategory",list);
+        request.setAttribute("id",id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("editForm.jsp");
         try {
             dispatcher.forward(request,response);

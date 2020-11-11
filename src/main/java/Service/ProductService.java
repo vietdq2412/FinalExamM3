@@ -12,14 +12,15 @@ public class ProductService implements IProductService {
 
     @Override
     public boolean addNewProduct(Product product) {
-        String sql = "insert into product(name, price, color, description, category) values (?,?,?,?,?);";
+        String sql = "insert into product(name, price, color,quantity, description, category) values (?,?,?,?,?,?);";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, product.getName());
             stm.setInt(2, product.getPrice());
             stm.setString(3, product.getColor());
-            stm.setString(4, product.getDescription());
-            stm.setString(5, product.getCategory());
+            stm.setInt(4, product.getQuantity());;
+            stm.setString(5, product.getDescription());
+            stm.setString(6, product.getCategory());
             stm.executeUpdate();
             return true;
         } catch (SQLException throwables) {
@@ -73,13 +74,13 @@ public class ProductService implements IProductService {
 
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1,id);
-            stm.setString(2,name);
-            stm.setInt(3,price);
-            stm.setString(4,color);
-            stm.setInt(5,quantity);
-            stm.setString(6,description);
-            stm.setString(7,category);
+            stm.setInt(7,id);
+            stm.setString(1,name);
+            stm.setInt(2,price);
+            stm.setString(3,color);
+            stm.setInt(4,quantity);
+            stm.setString(5,description);
+            stm.setString(6,category);
             stm.executeUpdate();
             return true;
         } catch (SQLException throwables) {
@@ -95,6 +96,7 @@ public class ProductService implements IProductService {
         try {
             Statement stm = connection.createStatement();
             ResultSet rs = stm.executeQuery(sql);
+            rs.next();
             int id = rs.getInt("ID");
             String name = rs.getString("name");
             int price = rs.getInt("price");
@@ -102,10 +104,39 @@ public class ProductService implements IProductService {
             String desc = rs.getString("description");
             int quantity = rs.getInt("quantity");
             String category = rs.getString("category");
+            System.out.println("id"+id);
             product = new Product(id, name, color, price, quantity, desc, category);
+            System.out.println("get product sucess");
+            return product;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return product;
+        return null;
+    }
+
+    @Override
+    public Product searchProduct(String str) {
+        String sql = "call search(?)";
+        Product product = null;
+        try {
+            CallableStatement stm = connection.prepareCall(sql);
+            stm.setString(1,str);
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            int id = rs.getInt("ID");
+            String name = rs.getString("name");
+            int price = rs.getInt("price");
+            String color = rs.getString("color");
+            String desc = rs.getString("description");
+            int quantity = rs.getInt("quantity");
+            String category = rs.getString("category");
+            System.out.println("id"+id);
+            product = new Product(id, name, color, price, quantity, desc, category);
+            System.out.println("get product sucess");
+            return product;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

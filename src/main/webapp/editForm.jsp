@@ -24,6 +24,10 @@
     <form action="/product?action=edit" method="post">
         <h1>Edit product</h1>
         <div class="form-group">
+            <label for="name">ID</label>
+            <input type="text" class="form-control" id="id" name="id" value="${id}">
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="${product.getName()}">
         </div>
@@ -46,8 +50,9 @@
         <div class="form-group">
             <select name="category" id="">
                 <c:forEach items="${listCategory}" var="category">
-                    <option value="${category}">${product.getCategory()}</option>
+                    <option value="${category}" selected="${product.getCategory()}">${category}</option>
                 </c:forEach>
+                <option value="se"></option>
             </select>
         </div>
         <button class="btn-primary">Submit</button>

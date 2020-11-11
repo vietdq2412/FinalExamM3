@@ -33,10 +33,8 @@
             <a href="/product?action=show"><button class="btn-success">Show products</button></a>
         </div>
         <div style="float: right;">
-            <form action="/product?action=search" method="post">
-                <input type="text"  id="qua" name="str">
-               <button class="btn-primary">Search</button>
-            </form>
+            <input type="text" name="search">
+            <a href="/product?action=search"><button class="btn-primary">Search</button></a>
         </div>
     </div>
     <table class="table">
@@ -52,7 +50,6 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${listProduct}" var="product">
             <tr>
                 <th scope="row">${product.getId()}</th>
                 <td>${product.getName()}</td>
@@ -65,8 +62,6 @@
                     <a href="/product?action=delete&&id=${product.getId()}"><button>Delete</button></a>
                 </td>
             </tr>
-        </c:forEach>
-
         </tbody>
     </table>
 </div>
